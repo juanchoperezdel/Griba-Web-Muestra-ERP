@@ -64,13 +64,7 @@ export default function PainStrip() {
         </div>
 
         <Reveal delay={0.5}>
-          <p className="mt-12 text-center text-sm text-white/40 max-w-xl mx-auto">
-            Frases reales de dueños y gerentes de distribuidoras argentinas.
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.6}>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <CTA variant="primary">
               Quiero salir de esto
             </CTA>

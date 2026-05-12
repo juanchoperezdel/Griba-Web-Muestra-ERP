@@ -134,7 +134,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border text-xs font-semibold text-fg-muted shadow-sm">
             <Truck size={14} className="text-brand-500" />
-            ERP para distribuidoras y mayoristas
+            No necesitás más Excel
           </span>
         </motion.div>
 
@@ -145,10 +145,9 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-fg leading-[1.08] max-w-4xl mx-auto text-center"
         >
-          Tu distribuidora no necesita más Excel.
-          <br />
+          Tu distribuidora necesita saber{" "}
           <span className="text-brand-600">
-            Necesita saber qué vendió, qué puede entregar y qué tiene que cobrar.
+            qué vendió, qué puede entregar y qué tiene que cobrar.
           </span>
         </motion.h1>
 
@@ -184,16 +183,6 @@ export default function Hero() {
             <ArrowDown size={16} />
           </a>
         </motion.div>
-
-        {/* Microcopy */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-4 text-sm text-fg-subtle text-center"
-        >
-          Demo con casos reales de preventa, stock, reparto y cuenta corriente. Sin compromiso.
-        </motion.p>
 
         {/* Dashboard mockup */}
         <motion.div

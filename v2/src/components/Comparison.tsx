@@ -42,7 +42,6 @@ export default function Comparison() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
           <SectionHeader
-            eyebrow="Comparativa realista"
             title={
               <>
                 Tu vendedor promete, depósito corre

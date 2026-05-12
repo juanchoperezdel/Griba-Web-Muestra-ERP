@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import gribaLogo from "../assets/griba-logo.png";
 
 const NAV_LINKS = [
   { href: "#flujo", label: "Cómo funciona" },
@@ -27,14 +28,12 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <span
-            className="font-display font-extrabold tracking-tight text-2xl text-fg"
-            style={{ letterSpacing: "-0.04em" }}
-          >
-            Griba
-          </span>
-          <span className="hidden sm:inline-block h-1.5 w-1.5 rounded-full bg-accent-500" />
+        <a href="#" className="flex items-center group" aria-label="Griba">
+          <img
+            src={gribaLogo}
+            alt="Griba"
+            className="h-7 sm:h-8 w-auto brightness-0 group-hover:opacity-80 transition-opacity"
+          />
         </a>
 
         {/* Desktop Nav */}
