@@ -3,7 +3,8 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === "production" ? "/v2/" : "/",
   plugins: [react(), tailwindcss()],
   server: {
     port: 5174,
@@ -14,4 +15,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "."),
     },
   },
-});
+}));
