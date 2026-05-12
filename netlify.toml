@@ -1,0 +1,21 @@
+# Build dual: v1 en /, v2 en /v2/
+# v1 (versión original) vive en root del repo.
+# v2 (versión reescrita) vive en v2/ y se sirve bajo el path /v2.
+
+[build]
+  command = "npm ci && npm run build && cd v2 && npm ci && npm run build && cd .. && rm -rf dist/v2 && mkdir -p dist/v2 && cp -r v2/dist/. dist/v2/"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback para v1 (cualquier ruta no encontrada cae al index principal)
+[[redirects]]
+  from = "/v2/*"
+  to = "/v2/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
