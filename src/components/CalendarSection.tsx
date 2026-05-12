@@ -1,88 +1,106 @@
-import { motion } from 'motion/react';
-import { Clock } from 'lucide-react';
+import { motion } from "motion/react";
+import { Clock, ShieldCheck } from "lucide-react";
+
+const STEPS = [
+  {
+    n: 1,
+    title: "Diagnóstico de tu operación actual",
+    desc: "Te preguntamos qué sistema usás hoy, cuántos vendedores, depósito, zonas de reparto y dónde se traba el día a día.",
+    duration: "10 min",
+  },
+  {
+    n: 2,
+    title: "Demo de Griba para distribuidoras",
+    desc: "Te mostramos Griba con datos parecidos a los tuyos: preventistas, stock, cuenta corriente, reparto y administración.",
+    duration: "15 min",
+  },
+  {
+    n: 3,
+    title: "Próximos pasos y pricing aproximado",
+    desc: "Si avanzamos, te damos un plan de migración con plazos y un rango de inversión claro.",
+    duration: "5 min",
+  },
+];
 
 export default function CalendarSection() {
   return (
-    <section id="calendario" className="py-24 bg-[#020817] text-white overflow-hidden">
+    <section id="calendario" className="py-24 lg:py-32 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="bg-slate-900/50 rounded-2xl border border-slate-800 shadow-xl p-8 md:p-12 lg:p-16 relative backdrop-blur-sm">
-          
-          <div className="absolute top-0 right-0 w-full h-full bg-blue-600 opacity-5 blur-[150px] pointer-events-none"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
-            
+        <div className="bg-surface rounded-3xl border border-border shadow-md p-8 md:p-12 lg:p-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Texto + pasos */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
-                Agendá una sesión <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">estratégica.</span>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent-600 mb-4">
+                30 minutos · sin compromiso
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-fg">
+                Demo enfocada en tu distribuidora.
+                <br />
+                <span className="text-brand-600">Sin PowerPoint genérico.</span>
               </h2>
-              <p className="text-lg text-slate-300 mb-10 max-w-lg leading-relaxed">
-                Agenda una sesión estratégica de 30 minutos. Auditaremos la topología de tu operación actual y trazaremos el proceso de integración hacia Griba ERP.
+              <p className="text-lg text-fg-muted mb-10 max-w-lg leading-relaxed">
+                Te mostramos exactamente dónde estás perdiendo control hoy: pedidos, stock, cobranzas y reparto. 30 minutos, sin compromiso.
               </p>
 
-              <div className="space-y-6">
-                <div className="flex gap-4 items-start pb-6 border-b border-slate-800/50">
-                  <div className="w-10 h-10 bg-blue-500/10 rounded-xl text-blue-400 flex items-center justify-center shrink-0 mt-1 font-semibold">
-                    1
+              <div className="space-y-5">
+                {STEPS.map((step) => (
+                  <div
+                    key={step.n}
+                    className="flex gap-4 items-start"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 font-display font-bold">
+                      {step.n}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <h4 className="font-semibold text-fg text-base">{step.title}</h4>
+                        <span className="text-xs font-mono text-fg-subtle whitespace-nowrap">
+                          {step.duration}
+                        </span>
+                      </div>
+                      <p className="text-fg-muted text-sm mt-1 leading-relaxed">{step.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-white text-lg">Diagnóstico Inicial</h4>
-                     <p className="text-slate-400 text-sm mt-1">Mapeamos tus cuellos de botella y las limitantes de tu operativa actual.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 items-start pb-6 border-b border-slate-800/50">
-                  <div className="w-10 h-10 bg-blue-500/10 rounded-xl text-blue-400 flex items-center justify-center shrink-0 mt-1 font-semibold">
-                    2
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-white text-lg">Demostración</h4>
-                     <p className="text-slate-400 text-sm mt-1">Demo de Griba procesando un entorno transaccional similar al tuyo.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 bg-blue-500/10 rounded-xl text-blue-400 flex items-center justify-center shrink-0 mt-1 font-semibold">
-                    3
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-white text-lg">Plan de implementación</h4>
-                     <p className="text-slate-400 text-sm mt-1">Proyección de plazos y requerimientos de la migración en paralelo.</p>
-                  </div>
-                </div>
+                ))}
               </div>
 
-              <div className="mt-12 flex items-center gap-4 text-sm font-semibold text-slate-400">
-                <div className="flex items-center gap-2 bg-slate-800/50 rounded-full px-4 py-2 border border-slate-700/50">
-                  <Clock className="w-4 h-4 text-blue-400" />
-                  <span>Duración: 30 minutos</span>
-                </div>
+              <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-fg-muted">
+                <span className="inline-flex items-center gap-2 bg-surface-2 rounded-full px-4 py-2 border border-border">
+                  <Clock className="w-4 h-4 text-brand-500" />
+                  30 minutos
+                </span>
+                <span className="inline-flex items-center gap-2 bg-surface-2 rounded-full px-4 py-2 border border-border">
+                  <ShieldCheck className="w-4 h-4 text-brand-500" />
+                  Sin compromiso
+                </span>
               </div>
+
+              <p className="mt-8 text-sm text-fg-subtle border-l-2 border-accent-500 pl-4">
+                Sos vos quien decide cuándo y cuánto avanzar. La demo es solo conversación.
+              </p>
             </motion.div>
 
-
-            {/* Calendly iframe placeholder */}
+            {/* Calendly iframe */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-2 rounded-2xl border border-slate-700 shadow-2xl h-[600px]"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-white p-1 rounded-2xl border border-border shadow-lg h-[600px] overflow-hidden"
             >
-              <iframe 
-                src="https://calendly.com/calendly-demo" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0, backgroundColor: '#ffffff', borderRadius: '12px' }} 
+              <iframe
+                src="https://calendly.com/calendly-demo"
+                width="100%"
+                height="100%"
+                style={{ border: 0, backgroundColor: "#ffffff", borderRadius: "12px" }}
                 title="Agendar Demo Griba"
               />
             </motion.div>
-
           </div>
         </div>
       </div>
