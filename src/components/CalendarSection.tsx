@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { motion } from "motion/react";
 import { Clock, ShieldCheck } from "lucide-react";
+
+const LEADCONNECTOR_SCRIPT = "https://link.msgsndr.com/js/form_embed.js";
 
 const STEPS = [
   {
@@ -23,6 +26,17 @@ const STEPS = [
 ];
 
 export default function CalendarSection() {
+  useEffect(() => {
+    // Carga el script de LeadConnector que hace autoresize del iframe.
+    // Idempotente: si ya está en la página (por remount o navegación SPA),
+    // no lo duplica.
+    if (document.querySelector(`script[src="${LEADCONNECTOR_SCRIPT}"]`)) return;
+    const script = document.createElement("script");
+    script.src = LEADCONNECTOR_SCRIPT;
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <section id="calendario" className="py-24 lg:py-32 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,20 +99,25 @@ export default function CalendarSection() {
               </p>
             </motion.div>
 
-            {/* Calendly iframe */}
+            {/* LeadConnector booking widget */}
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white p-1 rounded-2xl border border-border shadow-lg h-[600px] overflow-hidden"
+              className="bg-white p-1 rounded-2xl border border-border shadow-lg"
             >
               <iframe
-                src="https://calendly.com/calendly-demo"
-                width="100%"
-                height="100%"
-                style={{ border: 0, backgroundColor: "#ffffff", borderRadius: "12px" }}
-                title="Agendar Demo Griba"
+                src="https://api.leadconnectorhq.com/widget/booking/Vw3iw1NjrhV6fGuX7cAQ"
+                id="Vw3iw1NjrhV6fGuX7cAQ_1779130578111"
+                title="Agendar demo Griba"
+                scrolling="no"
+                style={{
+                  width: "100%",
+                  border: "none",
+                  overflow: "hidden",
+                  borderRadius: "12px",
+                }}
               />
             </motion.div>
           </div>
