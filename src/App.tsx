@@ -12,8 +12,9 @@ import Faqs from "./components/Faqs";
 import CalendarSection from "./components/CalendarSection";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
+import ThankYou from "./components/ThankYou";
 
-export default function App() {
+function Landing() {
   return (
     <div className="min-h-screen bg-bg font-sans text-fg selection:bg-brand-500 selection:text-white">
       <Navbar />
@@ -34,4 +35,18 @@ export default function App() {
       <Footer />
     </div>
   );
+}
+
+export default function App() {
+  // Simple path-based routing — sin dependencias externas.
+  // Netlify SPA fallback (`/* → /index.html`) entrega esta SPA en cualquier ruta,
+  // y acá decidimos qué renderizar según el pathname.
+  const pathname =
+    typeof window !== "undefined" ? window.location.pathname : "/";
+
+  if (pathname === "/gracias" || pathname === "/gracias/") {
+    return <ThankYou />;
+  }
+
+  return <Landing />;
 }
