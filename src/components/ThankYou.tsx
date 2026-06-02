@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
-import { CheckCircle2, Mail, Calendar, MessageSquare } from "lucide-react";
+import { CheckCircle2, Mail, Calendar, MessageSquare, MessageCircle } from "lucide-react";
 import gribaLogo from "../assets/griba-logo.png";
+
+const WHATSAPP_CONFIRM_URL = "https://wa.link/en2aaz";
 
 const EXPECTATIONS = [
   {
@@ -80,9 +82,43 @@ export default function ThankYou() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-6 text-lg text-fg-muted leading-relaxed max-w-xl mx-auto"
           >
-            Nuestro equipo te va a contactar si surge algún inconveniente. Mientras tanto,
-            te dejamos lo que podés esperar de acá hasta la reunión.
+            Te llega un mail con los detalles. Pero antes de cerrar esta página,
+            necesitamos un último paso para asegurar tu lugar.
           </motion.p>
+
+          {/* Paso obligatorio: confirmar por WhatsApp */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-10 max-w-xl mx-auto"
+          >
+            <div className="relative rounded-2xl border-2 border-[#25D366] bg-white shadow-lg p-6 sm:p-7 text-left">
+              <div className="absolute -top-3 left-6 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#25D366] text-white text-[11px] font-bold uppercase tracking-wider">
+                Último paso
+              </div>
+              <h2 className="font-display text-xl sm:text-2xl font-extrabold text-fg leading-snug mb-2">
+                Confirmá tu reunión por WhatsApp
+              </h2>
+              <p className="text-sm text-fg-muted leading-relaxed mb-5">
+                Mandanos un mensaje rápido para confirmar que vas a asistir. Así te
+                guardamos el espacio del especialista y te recordamos el día previo
+                por el mismo chat.
+              </p>
+              <a
+                href={WHATSAPP_CONFIRM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#1ebe5a] text-white font-bold rounded-full transition-colors shadow-md hover:shadow-lg"
+              >
+                <MessageCircle size={18} strokeWidth={2.5} />
+                Confirmar ahora por WhatsApp
+              </a>
+              <p className="mt-3 text-xs text-fg-subtle text-center">
+                Te lleva 10 segundos. Sin esto, podemos liberar el horario.
+              </p>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -117,7 +153,7 @@ export default function ThankYou() {
           >
             <a
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-fg hover:bg-brand-600 text-white font-semibold rounded-full transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 text-fg-muted hover:text-fg font-medium transition-colors"
             >
               Volver al inicio
             </a>
