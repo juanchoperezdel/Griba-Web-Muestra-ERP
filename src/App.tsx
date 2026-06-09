@@ -13,6 +13,7 @@ import CalendarSection from "./components/CalendarSection";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import ThankYou from "./components/ThankYou";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 
 function Landing() {
   return (
@@ -33,6 +34,7 @@ function Landing() {
         <FinalCTA />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   );
 }

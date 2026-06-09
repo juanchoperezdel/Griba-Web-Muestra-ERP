@@ -38,7 +38,7 @@ export default function CalendarSection() {
   }, []);
 
   return (
-    <section id="calendario" className="py-24 lg:py-32 bg-bg">
+    <section className="py-24 lg:py-32 bg-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-surface rounded-3xl border border-border shadow-md p-8 md:p-12 lg:p-16">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -101,11 +101,12 @@ export default function CalendarSection() {
 
             {/* LeadConnector booking widget */}
             <motion.div
+              id="calendario"
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white p-1 rounded-2xl border border-border shadow-lg"
+              className="bg-white p-1 rounded-2xl border border-border shadow-lg scroll-mt-24"
             >
               <iframe
                 src="https://api.leadconnectorhq.com/widget/booking/Vw3iw1NjrhV6fGuX7cAQ"
