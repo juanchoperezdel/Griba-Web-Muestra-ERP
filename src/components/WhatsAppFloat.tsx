@@ -1,6 +1,43 @@
-import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { X } from "lucide-react";
 
-const WHATSAPP_URL = "https://wa.link/ergytd";
+// Número crudo de WhatsApp (resuelto desde wa.link/ergytd) — permite pre-cargar
+// el primer mensaje según la respuesta del lead.
+const WHATSAPP_PHONE = "5493814636568";
+
+function waUrl(message: string) {
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+// Pregunta-filtro: una sola, simple, diagnóstica. Cada opción es un <a href>
+// directo a WhatsApp con su propio mensaje, para que el cliente sepa con quién
+// habla antes de responder (combate el ghosting: el lead llega con su intención
+// ya escrita). Usamos <a href> real (no window.open) porque buena parte del
+// tráfico entra desde navegadores in-app de Instagram/Facebook, donde el JS
+// puede bloquear la apertura.
+const OPTIONS = [
+  {
+    label: "En Excel y planillas",
+    message:
+      "¡Hola! Hoy manejo mi operación en Excel y planillas. Quiero ver cómo Griba me la ordenaría.",
+  },
+  {
+    label: "En WhatsApp y papel",
+    message:
+      "¡Hola! Hoy trabajo con WhatsApp y papel. Quiero ver cómo se vería todo en un solo sistema con Griba.",
+  },
+  {
+    label: "Un sistema que se quedó corto",
+    message:
+      "¡Hola! Tengo un sistema que se me quedó corto. Quiero ver qué resuelve Griba que el mío no.",
+  },
+  {
+    label: "Ya tengo algo, busco mejorar",
+    message:
+      "¡Hola! Ya tengo un sistema y busco mejorar mi operación. Quiero compararlo con Griba.",
+  },
+] as const;
 
 // Logo oficial de WhatsApp (SVG inline) — evita agregar deps tipo react-icons.
 function WhatsAppIcon({ size = 28 }: { size?: number }) {
@@ -19,29 +56,136 @@ function WhatsAppIcon({ size = 28 }: { size?: number }) {
 }
 
 export default function WhatsAppFloat() {
-  return (
-    <motion.a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Hablar por WhatsApp"
-      initial={{ opacity: 0, scale: 0.6, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.8, type: "spring", stiffness: 280 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 group flex items-center justify-center h-14 w-14 sm:h-15 sm:w-15 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-lg shadow-black/20 hover:shadow-xl transition-colors"
-    >
-      {/* Pulse animado de fondo (sutil, no distrae) */}
-      <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" />
-      <span className="relative flex items-center justify-center">
-        <WhatsAppIcon size={28} />
-      </span>
+  const [open, setOpen] = useState(false);
 
-      {/* Tooltip al hover en desktop */}
-      <span className="hidden md:inline-block absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-fg text-white text-sm font-medium whitespace-nowrap opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none">
-        ¿Charlamos por WhatsApp?
-      </span>
-    </motion.a>
+  // Cerrar con Escape mientras el panel está abierto.
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  return (
+    <>
+      {/* Panel de calificación */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="wa-panel"
+            role="dialog"
+            aria-label="Calificación rápida antes de WhatsApp"
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.96 }}
+            transition={{ duration: 0.25, type: "spring", stiffness: 280, damping: 26 }}
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm origin-bottom-right"
+          >
+            <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-black/15">
+              {/* Header */}
+              <div className="flex items-center gap-3 bg-[#25D366] px-4 py-3.5 text-white">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
+                  <WhatsAppIcon size={20} />
+                </div>
+                <div className="min-w-0 flex-1 leading-tight">
+                  <p className="text-sm font-bold">Griba</p>
+                  <p className="flex items-center gap-1.5 text-[11px] text-white/85">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-white" />
+                    Te respondemos en minutos
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Cerrar"
+                  className="flex h-7 w-7 items-center justify-center rounded-full text-white/90 transition-colors hover:bg-white/20"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Body — pregunta + opciones (cada una es un link directo a WhatsApp) */}
+              <div className="px-4 py-5 sm:px-5">
+                <h3 className="font-display text-lg font-extrabold leading-snug text-fg">
+                  ¿Dónde vive tu operación hoy?
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
+                  Contanos en una línea y lo vemos en el diagnóstico, sin
+                  compromiso.
+                </p>
+
+                <div className="mt-4 flex flex-col gap-2.5">
+                  {OPTIONS.map((opt) => (
+                    <a
+                      key={opt.label}
+                      href={waUrl(opt.message)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setOpen(false)}
+                      className="w-full rounded-xl border border-border bg-surface-2 px-4 py-3 text-left text-sm font-semibold text-fg transition-all hover:border-brand-400 hover:bg-surface hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                    >
+                      {opt.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Botón flotante (launcher) */}
+      <motion.button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label={open ? "Cerrar chat" : "Hablar por WhatsApp"}
+        aria-expanded={open}
+        initial={{ opacity: 0, scale: 0.6, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.8, type: "spring", stiffness: 280 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20 transition-colors hover:bg-[#1ebe5a] hover:shadow-xl sm:bottom-6 sm:right-6 sm:h-15 sm:w-15"
+      >
+        {/* Pulse animado de fondo (solo cuando está cerrado, no distrae) */}
+        {!open && (
+          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping" />
+        )}
+        <span className="relative flex items-center justify-center">
+          <AnimatePresence mode="wait" initial={false}>
+            {open ? (
+              <motion.span
+                key="icon-close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <X size={26} strokeWidth={2.5} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="icon-wa"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <WhatsAppIcon size={28} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </span>
+
+        {/* Tooltip al hover en desktop (solo cuando está cerrado) */}
+        {!open && (
+          <span className="pointer-events-none absolute right-full mr-3 hidden translate-x-2 whitespace-nowrap rounded-lg bg-fg px-3 py-1.5 text-sm font-medium text-white opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 md:inline-block">
+            ¿Charlamos por WhatsApp?
+          </span>
+        )}
+      </motion.button>
+    </>
   );
 }
