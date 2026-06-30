@@ -14,6 +14,7 @@ import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import ThankYou from "./components/ThankYou";
 import WhatsAppFloat from "./components/WhatsAppFloat";
+import LandingV2 from "./LandingV2";
 
 function Landing() {
   return (
@@ -48,6 +49,10 @@ export default function App() {
 
   if (pathname === "/gracias" || pathname === "/gracias/") {
     return <ThankYou />;
+  }
+
+  if (pathname === "/v2" || pathname === "/v2/") {
+    return <LandingV2 />;
   }
 
   return <Landing />;
