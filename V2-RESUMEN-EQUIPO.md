@@ -8,8 +8,8 @@
 
 - **Problema:** la landing ERP actual mide conversión ~**0,3%** (casi nadie agenda). En la reunión del 30/06, Leo (dueño de Griba) pidió un volantazo: el ROI está en riesgo y todavía no hubo una sola reunión calificada de proyecto.
 - **Diagnóstico:** la landing actual está **hiper-nichada a distribuidoras** (preventista, depósito, reparto, camión), es **larga** (12 secciones) y el **diferenciador real de Griba está enterrado**. El mensaje no engancha el dolor del comprador.
-- **Decisión:** construir una **v2** que clona la narrativa de la landing de **Smartway** (general en rubro, más visceral, foco en el dolor, condensada) pero **manteniendo la estética visual de Griba** (azul, tipografías, fondo claro).
-- **Eje nuevo:** el diferenciador que Leo nombró textual —*adaptabilidad + acompañamiento*— pasa a ser el corazón: **"Griba se adapta a vos; los enlatados (Odoo, Finnegan) te hacen esperar una versión"**. Es casi idéntico a la tesis de Smartway ("a medida vs enlatado").
+- **Decisión:** construir una **v2** que adopta un patrón de **landing de alta conversión** (general en rubro, más visceral, foco en el dolor, condensada) pero **manteniendo la estética visual de Griba** (azul, tipografías, fondo claro).
+- **Eje nuevo:** el diferenciador que Leo nombró textual —*adaptabilidad + acompañamiento*— pasa a ser el corazón: **"Griba se adapta a vos; los enlatados (Odoo, Finnegan) te hacen esperar una versión"** (el clásico *a medida vs enlatado*).
 - **Entrega:** la v2 está **live en la ruta `/v2`**; la actual (`/`) quedó **intacta**, así se pueden comparar y correr A/B.
 - **Qué falta para paid:** (1) que Leo **confirme los números** del hero; (2) **cablear el tracking de conversión** (hoy ciego) para que Meta/Google optimicen.
 
@@ -38,7 +38,7 @@ Coincide con nuestro diagnóstico previo de mediciones (Clarity): conversión ~n
 - **Tesis difusa:** la adaptabilidad/acompañamiento —el verdadero "por qué Griba"— vivía enterrada en la sección 10 ("Quiénes somos"), no como argumento central.
 - **Le habla al que vende, no al que compra/decide:** todo el relato es el flujo del vendedor, no el dolor del dueño.
 
-**De la landing de Smartway (referencia que pidió el cliente):**
+**De la landing de referencia de alta conversión (que pidió el cliente como modelo):**
 - General en rubro (cualquier PyME) pero **brutal en el dolor** ("Estás pagando sueldos para cargar planillas a mano").
 - Un **único eje** claro: *software que se adapta a vos vs SaaS enlatado que te obliga a adaptarte*. → **Es exactamente el pitch de Leo.**
 - **Condensada** (~10 secciones) con un embudo probado: dolor → por qué → prueba (calculadora) → cómo → objeciones → CTA.
@@ -48,15 +48,15 @@ Coincide con nuestro diagnóstico previo de mediciones (Clarity): conversión ~n
 
 ## Qué hicimos (la v2)
 
-Clonamos la **estructura y narrativa de Smartway** sobre la **estética de Griba**. Tres movimientos centrales:
+Adoptamos la **estructura y narrativa de la landing de referencia** sobre la **estética de Griba**. Tres movimientos centrales:
 
 1. **Desnichar:** soltar el lenguaje exclusivo de distribuidora. Hablarle a cualquier PyME que opera con Excel/WhatsApp y sistemas que no se adaptan. Distribuidora queda como **un ejemplo**, no como el todo.
-2. **Subir el diferenciador a sección propia:** la comparación pasa a ser *"se adapta vs enlatado"*, nombrando a **Odoo y Finnegan** (como hace Smartway con Odoo/Tango), que es lo que vuelve el mensaje creíble y relevante para el cliente.
+2. **Subir el diferenciador a sección propia:** la comparación pasa a ser *"se adapta vs enlatado"*, nombrando a **Odoo y Finnegan**, que es lo que vuelve el mensaje creíble y relevante para el cliente.
 3. **Condensar:** de 12 a **9 secciones**, fusionando los bloques redundantes.
 
 ### Estructura final de la v2 (9 secciones)
 1. **Hero** — dolor visceral ("Estás pagando sueldos para que tu equipo cargue lo mismo dos veces") + 3 cifras de prueba.
-2. **Dolor** — clon del de Smartway: *"Tu equipo no es lento. Tu sistema sí."* + 3 dolores generales.
+2. **Dolor** — *"Tu equipo no es lento. Tu sistema sí."* + 3 dolores generales.
 3. **Por qué Griba** — 2 columnas *enlatado rígido vs se-adapta-a-vos*, nombrando Odoo/Finnegan. (corazón del mensaje)
 4. **Calculadora ROI** — costo **anual** de operar a mano (más visceral), con puente a la demo.
 5. **Cómo trabaja Griba** — 4 tarjetas de **resultado** generales (un solo sistema / stock real / cuentas claras / decisiones con datos), no el flujo del vendedor.
@@ -66,7 +66,7 @@ Clonamos la **estructura y narrativa de Smartway** sobre la **estética de Griba
 9. **CTA final.**
 
 ### Guardarraíles de copy que respetamos
-- **Nada de "a medida desde cero":** Griba es un ERP-producto que se *configura/adapta*, no software factory. (Eso lo diferencia de Smartway, que sí es desarrollo a medida.)
+- **Nada de "a medida desde cero":** Griba es un ERP-producto que se *configura/adapta*, no software factory. El copy usa siempre *configurar/adaptar/acomodar*, nunca "desarrollo a medida".
 - **Vocabulario simple:** sacamos jerga como *"lock-in"* → "te llevás tus datos cuando quieras".
 - **Sin cifras inventadas** salvo las 3 del hero, que están **pendientes de validar con Leo**.
 - **Loss-frame sin culpar al equipo:** "no es tu equipo, es tu sistema".

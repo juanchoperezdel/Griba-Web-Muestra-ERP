@@ -11,7 +11,7 @@ import FinalCTA from "./components/v2/FinalCTA";
 import Footer from "./components/Footer";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 
-// v2 — narrativa Smartway (general, visceral, eje "se adapta vs enlatado")
+// v2 — narrativa de alta conversión (general, visceral, eje "se adapta vs enlatado")
 // sobre la estética visual de Griba. Sirve en la ruta /v2; la v1 queda intacta.
 export default function LandingV2() {
   return (

@@ -3,7 +3,7 @@ import SectionHeader from "../ui/SectionHeader";
 import CTA from "../ui/CTA";
 import Reveal from "../ui/Reveal";
 
-// "Cómo trabaja Griba" — estilo Smartway: tarjetas de resultado generales
+// "Cómo trabaja Griba" — tarjetas de resultado generales
 // (no un flujo de venta paso a paso). Cada una arranca de un dolor concreto.
 const CARDS = [
   {
